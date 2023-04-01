@@ -1,6 +1,5 @@
 from fastapi import FastAPI
-import journeys
-import stations
+from .routers import journeys, stations
 
 app = FastAPI()
 
