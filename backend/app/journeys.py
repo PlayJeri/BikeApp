@@ -11,9 +11,10 @@ router = APIRouter(
 )
 
 
-@router.get('/journeys')
+@router.get('/journeys', response_model=List[JourneyResponse])
 def get_journeys(db: Session = Depends(get_db)):
-    
-    journey_list = db.query(Journey).limit(10).all()
 
+    journey_list = db.query(Journey).limit(10).all()
+    
     return journey_list
+
