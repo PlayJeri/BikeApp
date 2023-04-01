@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Float, Integer, TIMESTAMP
 
-from .database import Base
+from database import Base
 
 class Station(Base):
     __tablename__ = "stations"

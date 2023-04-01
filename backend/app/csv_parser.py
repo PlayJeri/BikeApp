@@ -1,5 +1,5 @@
-from app.database import SessionLocal, engine, Base
-from app.models import Journey, Station
+from database import SessionLocal, engine, Base
+from models import Journey, Station
 from datetime import datetime
 import csv
 
