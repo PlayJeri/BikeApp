@@ -1,5 +1,4 @@
-from sqlalchemy import Column, String, Float, Integer, DateTime, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String, Float, Integer, DateTime
 
 from .database import Base
 
@@ -20,8 +19,8 @@ class Station(Base):
     x_coordinate = Column(Float)
     y_coordinate = Column(Float)
 
-class Ride(Base):
-    __tablename__ = "rides"
+class Journey(Base):
+    __tablename__ = "journeys"
 
     id = Column(Integer, primary_key=True, nullable=False)
     departure_time = Column(DateTime)
