@@ -8,6 +8,9 @@ __pycache__/
 # C extensions
 *.so
 
+# sqlite
+*.db
+
 # macOS
 .DS_Store
 
