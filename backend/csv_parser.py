@@ -4,7 +4,6 @@ from datetime import datetime
 import csv
 
 
-date_format = "%Y-%m-%dT%H:%M:%S"
 journeys_csv_filenames = ['2021-05.csv', '2021-06.csv', '2021-07.csv']
 stations_csv_filename = 'stations.csv'
 csv_folder_path = 'csv_files'
@@ -20,8 +19,8 @@ def add_journeys(folder_path, filename):
             try:
                 if (int(row[6]) > 10) and (int(row[7]) > 10):
                     new_ride = Journey(
-                        departure_time=datetime.strptime(row[0], date_format),
-                        return_time=datetime.strptime(row[1], date_format),
+                        departure_time=datetime.fromisoformat(row[0]),
+                        return_time=datetime.fromisoformat(row[1]),
                         departure_station_id=int(row[2]),
                         departure_station_name=row[3],
                         return_station_id=int(row[4]),

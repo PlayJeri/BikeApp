@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Float, Integer, DateTime
+from sqlalchemy import Column, String, Float, Integer, TIMESTAMP
 
 from .database import Base
 
@@ -23,8 +23,8 @@ class Journey(Base):
     __tablename__ = "journeys"
 
     id = Column(Integer, primary_key=True, nullable=False)
-    departure_time = Column(DateTime)
-    return_time = Column(DateTime)
+    departure_time = Column(TIMESTAMP)
+    return_time = Column(TIMESTAMP)
     departure_station_id = Column(Integer)
     departure_station_name = Column(String)
     return_station_id = Column(Integer)
