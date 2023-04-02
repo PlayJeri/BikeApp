@@ -36,3 +36,10 @@ class StationResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+class StationListResponse(BaseModel):
+    station_id: int
+    station_name_finnish: str
+
+    class Config:
+        orm_mode = True
