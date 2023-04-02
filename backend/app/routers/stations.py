@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, status
+from fastapi_pagination import Page, paginate
 from sqlalchemy.orm import Session
 from sqlalchemy import func, desc
 from typing import List
@@ -61,7 +62,7 @@ def get_station(id: int, db: Session = Depends(get_db)):
     return station
 
 
-@router.get('/stations', response_model=List[StationListResponse])
+@router.get('/stations', response_model=Page[StationListResponse])
 def get_stations(db: Session = Depends(get_db)):
     
     stations = db.query(Station).all()
@@ -69,4 +70,4 @@ def get_stations(db: Session = Depends(get_db)):
     if not stations:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
-    return stations
+    return paginate(stations)
