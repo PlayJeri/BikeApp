@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-const Header: React.FC = () => {
+const Navbar: React.FC = () => {
   return (
     <header className="bg-gray-800">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,7 +17,7 @@ const Header: React.FC = () => {
               <Link to="/" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 JOURNEYS
               </Link>
-              <Link to="/" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <Link to="/stations" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 STATIONS
               </Link>
             </div>
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
           <div className="flex items-center">
             <input
               type="text"
-              className="block w-full sm:w-64 py-2 px-3 rounded-md bg-gray-700 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              className="hidden md:block w-full sm:w-64 py-2 px-3 rounded-md bg-gray-700 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
               placeholder="Search"
             />
           </div>
@@ -36,4 +36,4 @@ const Header: React.FC = () => {
 };
 
 
-export default Header;
+export default Navbar;
