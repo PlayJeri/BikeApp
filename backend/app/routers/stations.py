@@ -65,9 +65,18 @@ def get_station(id: int, db: Session = Depends(get_db)):
 @router.get('/stations', response_model=Page[StationListResponse])
 def get_stations(db: Session = Depends(get_db)):
     
-    stations = db.query(Station).all()
+    stations = db.query(Station).order_by(Station.station_name_finnish).all()
 
     if not stations:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
     return paginate(stations)
+
+
+@router.get('/stations/search', response_model=List[StationListResponse])
+def search_stations(db: Session = Depends(get_db),
+                    station_name: str = ""):
+    
+    stations = db.query(Station).filter(Station.station_name_finnish.ilike(f'%{station_name}%')).limit(3).all()
+
+    return stations

@@ -8,6 +8,7 @@ class Top5Station(BaseModel):
     count: int
 
 class JourneyResponse(BaseModel):
+    id: int
     departure_station_name: str
     return_station_name: str
     covered_distance: int

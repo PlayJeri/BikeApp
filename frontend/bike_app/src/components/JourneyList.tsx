@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 type Journey = {
+    id: number
     departure_station_name: string
     return_station_name: string
     covered_distance: number
@@ -69,7 +70,7 @@ const JourneyList: React.FC = () => {
         <tbody className="text-gray-600 text-sm font-light">
           {journeys.map((journey) => (
             <tr
-              key={`${journey.departure_station_name}-${journey.return_station_name}`}
+              key={`${journey.id}`}
               className="border-b border-gray-200 hover:bg-gray-200"
             >
               <td className="py-3 px-6 text-left whitespace-nowrap">

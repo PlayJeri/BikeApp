@@ -1,7 +1,45 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+interface Station {
+  station_id: number;
+  station_name_finnish: string;
+}
 
 const Navbar: React.FC = () => {
+  const [searchValue, setSearchValue] = useState('');
+  const [searchResults, setSearchResults] = useState<Station[]>([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchSearchStations = async () => {
+      const response = await fetch(`http://127.0.0.1:8000/stations/search?station_name=${searchValue}`);
+      const data = await response.json();
+      setSearchResults(data);
+    };
+
+    if (searchValue.length > 0) {
+      const timer = setTimeout(() => {
+        fetchSearchStations();
+      }, 500);
+
+      return () => clearTimeout(timer);
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchValue]);
+
+  const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+    setIsDropdownOpen(true);
+  };
+
+  const handleSetIsDropdownOpen = () => {
+    setTimeout(() => {
+      setIsDropdownOpen(false)
+    }, 100);
+  }
+
   return (
     <header className="bg-gray-800">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,12 +60,33 @@ const Navbar: React.FC = () => {
               </Link>
             </div>
           </div>
-          <div className="flex items-center">
+          <div className="relative flex items-center">
             <input
+              id="search-field"
               type="text"
-              className="hidden md:block w-full sm:w-64 py-2 px-3 rounded-md bg-gray-700 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-              placeholder="Search"
+              className="w-full sm:w-64 py-2 px-3 rounded-md bg-gray-700 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              placeholder="Search stations..."
+              onChange={handleSearchInputChange}
+              value={searchValue}
+              onBlur={handleSetIsDropdownOpen}
+              onFocus={() => setIsDropdownOpen(true)}
             />
+            {isDropdownOpen && (
+              <div className="absolute bg-white w-full mt-1 rounded-md shadow-lg" style={{top: '100%'}}>
+              <ul className="py-1">
+                {searchResults.map((station) => (
+                  <li key={station.station_id} className="px-3 py-2 hover:bg-gray-100">
+                    <Link
+                      to={`/station/${station.station_id}`}
+                      className="block text-gray-900 hover:text-white"
+                    >
+                      {station.station_name_finnish}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            )}
           </div>
         </div>
       </nav>
