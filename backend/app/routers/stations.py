@@ -79,4 +79,5 @@ def search_stations(db: Session = Depends(get_db),
     
     stations = db.query(Station).filter(Station.station_name_finnish.ilike(f'%{station_name}%')).limit(3).all()
 
+
     return stations
