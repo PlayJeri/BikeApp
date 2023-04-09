@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import StationData from '../pages/StationListPage'
+import Map from './Map';
 
 interface StationProps {
     stationID: string | undefined
@@ -34,6 +35,11 @@ interface StationData {
     }[]
 }
 
+interface StationDataProps {
+    xCoordinate: number
+    yCoordinate: number
+}
+
 export default function Station({ stationID }: StationProps) {
     const [stationData, setStationData] = useState<StationData | null>(null)
 
@@ -49,6 +55,11 @@ export default function Station({ stationID }: StationProps) {
 
     if (!stationData) {
         return <div className="text-4xl font-bold text-center my-8">Loading station data...</div>
+    }
+
+    const stationDataProps: StationDataProps = {
+        xCoordinate: stationData.x_coordinate,
+        yCoordinate: stationData.y_coordinate
     }
 
   return (
@@ -109,6 +120,7 @@ export default function Station({ stationID }: StationProps) {
                 </ul>
             </div>
         </div>
+        <Map x={stationData.x_coordinate} y={stationData.y_coordinate} />
     </div>
   );
 };
