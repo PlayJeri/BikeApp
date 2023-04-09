@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Float, Integer, TIMESTAMP
+from sqlalchemy import Column, String, Float, Integer, TIMESTAMP, UniqueConstraint
 
 from .database import Base
 
@@ -29,5 +29,9 @@ class Journey(Base):
     departure_station_name = Column(String)
     return_station_id = Column(Integer)
     return_station_name = Column(String)
-    covered_distance = Column(Integer, index=True)
-    duration = Column(Integer, index=True)
+    covered_distance = Column(Integer)
+    duration = Column(Integer)
+
+    __table_args__ = (
+        UniqueConstraint('departure_time', 'departure_station_id', 'return_time', 'return_station_id'),
+    )

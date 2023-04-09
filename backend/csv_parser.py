@@ -1,3 +1,4 @@
+from sqlalchemy.exc import IntegrityError
 from app.database import SessionLocal, engine, Base
 from app.models import Journey, Station
 from datetime import datetime
@@ -15,6 +16,7 @@ def add_journeys(folder_path, filename):
         reader = csv.reader(file)
         next(reader) # skip the headers row
         error_counter = 0
+        duplicate_counter = 0
         for row in reader:
             try:
                 if (int(row[6]) > 10) and (int(row[7]) > 10):
@@ -29,10 +31,15 @@ def add_journeys(folder_path, filename):
                         duration=int(row[7])
                         )
                     db.add(new_ride)
+                    db.commit()
+                else:
+                    error_counter+=1
             except:
-                error_counter+=1
+                db.rollback()
+                duplicate_counter+=1
         print(f'{error_counter} rows of data discarded')        
-        db.commit()
+        print(f'{duplicate_counter} duplicate rows discarded')      
+
 
 def add_stations(folder_path, filename):
     db = SessionLocal()
