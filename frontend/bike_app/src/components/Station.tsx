@@ -20,6 +20,8 @@ interface StationData {
     y_coordinate: number
     started_journeys_total: number
     ended_journeys_total: number
+    started_journeys_avg_distance: number
+    ended_journeys_avg_distance: number
     top5_return_stations: {
         station_id: number
         station_name_finnish: string
@@ -69,6 +71,18 @@ export default function Station({ stationID }: StationProps) {
                     Total journeys finished to this station
                 </h3>
                 <p className='text-5xl my-auto py-6'>{stationData.ended_journeys_total}</p>
+            </div>
+            <div className="bg-blue-900 text-white text-center p-4 rounded-xl flex flex-col justify-between">
+                <h3 className='text-xl font-bold'>
+                    Average journey distance from this station
+                </h3>
+                <p className='text-5xl my-auto py-6'>{(stationData.started_journeys_avg_distance / 1000).toFixed(1)} KM</p>
+            </div>
+            <div className="bg-blue-900 text-white text-center p-4 rounded-xl flex flex-col justify-between">
+                <h3 className='text-xl font-bold'>
+                    Average journey distance to this station
+                </h3>
+                <p className='text-5xl my-auto py-6'>{(stationData.ended_journeys_avg_distance / 1000).toFixed(1)} KM</p>
             </div>
             <div className="bg-blue-900 text-white text-center p-4 rounded-xl">
                 <h3 className='text-xl font-bold pb-3'>

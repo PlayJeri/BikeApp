@@ -24,38 +24,47 @@ def get_station(id: int, db: Session = Depends(get_db)):
     try:
         started_journeys_total = db.query(Journey).filter(Journey.departure_station_id==id).count()
         ended_journeys_total = db.query(Journey).filter(Journey.return_station_id==id).count()
+        started_journeys_avg_dist = (
+            db.query(
+                func.avg(Journey.covered_distance))
+                .filter(Journey.departure_station_id == id)
+                .scalar()
+            )
+        ended_journeys_avg_dist = (
+            db.query(
+                func.avg(Journey.covered_distance))
+                .filter(Journey.return_station_id == id)
+                .scalar())
         top5_return_stations = (
             db.query(
                 Journey.return_station_id,
                 Station.station_name_finnish,
-                func.count(Journey.return_station_id).label('count')
-            )
-            .join(Station, Journey.return_station_id == Station.id)
-            .filter(Journey.departure_station_id == id)
-            .group_by(Journey.return_station_id, Station.station_name_finnish)
-            .order_by(desc('count'))
-            .limit(5)
-            .all()
-        )
+                func.count(Journey.return_station_id).label('count'))
+                .join(Station, Journey.return_station_id == Station.id)
+                .filter(Journey.departure_station_id == id)
+                .group_by(Journey.return_station_id, Station.station_name_finnish)
+                .order_by(desc('count'))
+                .limit(5)
+                .all())
         top5_departure_station = (
             db.query(
                 Journey.departure_station_id,
                 Station.station_name_finnish,
-                func.count(Journey.departure_station_id).label('count')
-            )
-            .join(Station, Journey.departure_station_id == Station.id)
-            .filter(Journey.return_station_id == id)
-            .group_by(Journey.departure_station_id, Station.station_name_finnish)
-            .order_by(desc('count'))
-            .limit(5)
-            .all()
-        )
+                func.count(Journey.departure_station_id).label('count'))
+                .join(Station, Journey.departure_station_id == Station.id)
+                .filter(Journey.return_station_id == id)
+                .group_by(Journey.departure_station_id, Station.station_name_finnish)
+                .order_by(desc('count'))
+                .limit(5)
+                .all())
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail="Internal server error") from e
     
     station.started_journeys_total = started_journeys_total
     station.ended_journeys_total = ended_journeys_total
+    station.started_journeys_avg_distance = started_journeys_avg_dist
+    station.ended_journeys_avg_distance = ended_journeys_avg_dist
     station.top5_return_stations = [dict(zip(['station_id', 'station_name_finnish', 'count'], station)) for station in top5_return_stations]
     station.top5_departure_stations = [dict(zip(['station_id', 'station_name_finnish', 'count'], station)) for station in top5_departure_station]
 

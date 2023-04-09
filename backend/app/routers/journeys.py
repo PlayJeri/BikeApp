@@ -15,8 +15,8 @@ router = APIRouter(
 
 @router.get('/journeys', response_model=Page[JourneyResponse])
 def get_journeys(limit: int = 300,
-                 sort_by: Optional[str] = None,
-                 order: Optional[str] = None,
+                 sort_by: Optional[str] = 'null',
+                 order: Optional[str] = 'null',
                  page: int = 1,
                  offset: int = 0,
                  db: Session = Depends(get_db)):

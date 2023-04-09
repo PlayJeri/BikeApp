@@ -32,6 +32,8 @@ class StationResponse(BaseModel):
     y_coordinate: float
     started_journeys_total: int
     ended_journeys_total: int
+    started_journeys_avg_distance: int
+    ended_journeys_avg_distance: int
     top5_return_stations: List[Top5Station]
     top5_departure_stations: List[Top5Station]
 

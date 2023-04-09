@@ -63,7 +63,7 @@ const previousPage = () => {
                     <Link key={station.station_id} to={`/station/${station.station_id}`}>
                     <div key={station.station_id} className="bg-slate-500 shadow overflow-hidden sm:rounded-lg">
                         <div className="px-4 py-5 sm:px-6">
-                            <h3 className="text-xl leading-6 font-medium text-gray-900">{station.station_name_finnish}</h3>
+                            <h3 className="text-xl leading-6 font-medium text-gray-200">{station.station_name_finnish}</h3>
                         </div>
                     </div>
                     </Link>
