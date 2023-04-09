@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 
 class Top5Station(BaseModel):
@@ -30,10 +30,10 @@ class StationResponse(BaseModel):
     capacity: int
     x_coordinate: float
     y_coordinate: float
-    started_journeys_total: int
-    ended_journeys_total: int
-    started_journeys_avg_distance: int
-    ended_journeys_avg_distance: int
+    started_journeys_total: Optional[int]
+    ended_journeys_total: Optional[int]
+    started_journeys_avg_distance: Optional[int]
+    ended_journeys_avg_distance: Optional[int]
     top5_return_stations: List[Top5Station]
     top5_departure_stations: List[Top5Station]
 

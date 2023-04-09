@@ -45,7 +45,62 @@ def client(session):
     yield TestClient(app)
 
 @pytest.fixture()
-def test_stations(session):
+def test_stations_and_journeys(session):
+    journeys_data = [{
+        "departure_time": "2023-04-08 10:00:00",
+        "return_time": "2023-04-08 11:00:00",
+        "departure_station_id": 21,
+        "departure_station_name": "test_station_1",
+        "return_station_id": 24,
+        "return_station_name": "b_test_station_2",
+        "covered_distance": 5000,
+        "duration": 3600
+    }, {
+        "departure_time": "2023-04-08 12:00:00",
+        "return_time": "2023-04-08 13:00:00",
+        "departure_station_id": 21,
+        "departure_station_name": "b_test_station_2",
+        "return_station_id": 21,
+        "return_station_name": "j_test_station_3",
+        "covered_distance": 3000,
+        "duration": 3600
+    }, {
+        "departure_time": "2023-04-08 14:00:00",
+        "return_time": "2023-04-08 15:00:00",
+        "departure_station_id": 31,
+        "departure_station_name": "j_test_station_3",
+        "return_station_id": 21,
+        "return_station_name": "x_test_station_4",
+        "covered_distance": 10000,
+        "duration": 3600
+    }, {
+        "departure_time": "2023-04-08 16:00:00",
+        "return_time": "2023-04-08 17:00:00",
+        "departure_station_id": 21,
+        "departure_station_name": "x_test_station_4",
+        "return_station_id": 52,
+        "return_station_name": "a_test_station_5",
+        "covered_distance": 8000,
+        "duration": 3600
+    }, {
+        "departure_time": "2023-04-08 18:00:00",
+        "return_time": "2023-04-08 19:00:00",
+        "departure_station_id": 52,
+        "departure_station_name": "a_test_station_5",
+        "return_station_id": 21,
+        "return_station_name": "test_station_1",
+        "covered_distance": 6000,
+        "duration": 3600
+    }]
+
+    def create_journey_model(journey):
+        return models.Journey(**journey)
+    
+    journey_map = map(create_journey_model, journeys_data)
+    journeys = list(journey_map)
+
+    session.add_all(journeys)
+    
     stations_data = [{
         "station_id": 21,
         "station_name_finnish": "test_station_1",
@@ -123,60 +178,5 @@ def test_stations(session):
     session.commit()
 
     stations = session.query(models.Station).all()
-    return stations
-
-@pytest.fixture
-def test_journeys(session):
-    journeys_data = [{
-        "departure_time": "2023-04-08 10:00:00",
-        "return_time": "2023-04-08 11:00:00",
-        "departure_station_id": 21,
-        "departure_station_name": "test_station_1",
-        "return_station_id": 24,
-        "return_station_name": "b_test_station_2",
-        "covered_distance": 5000,
-        "duration": 3600
-    }, {
-        "departure_time": "2023-04-08 12:00:00",
-        "return_time": "2023-04-08 13:00:00",
-        "departure_station_id": 21,
-        "departure_station_name": "b_test_station_2",
-        "return_station_id": 21,
-        "return_station_name": "j_test_station_3",
-        "covered_distance": 3000,
-        "duration": 3600
-    }, {
-        "departure_time": "2023-04-08 14:00:00",
-        "return_time": "2023-04-08 15:00:00",
-        "departure_station_id": 31,
-        "departure_station_name": "j_test_station_3",
-        "return_station_id": 21,
-        "return_station_name": "x_test_station_4",
-        "covered_distance": 10000,
-        "duration": 3600
-    }, {
-        "departure_time": "2023-04-08 16:00:00",
-        "return_time": "2023-04-08 17:00:00",
-        "departure_station_id": 21,
-        "departure_station_name": "x_test_station_4",
-        "return_station_id": 52,
-        "return_station_name": "a_test_station_5",
-        "covered_distance": 8000,
-        "duration": 3600
-    }, {
-        "departure_time": "2023-04-08 18:00:00",
-        "return_time": "2023-04-08 19:00:00",
-        "departure_station_id": 52,
-        "departure_station_name": "a_test_station_5",
-        "return_station_id": 21,
-        "return_station_name": "test_station_1",
-        "covered_distance": 6000,
-        "duration": 3600
-    }]
-    journeys = []
-    for journey_data in journeys_data:
-        journey = models.Journey(**journey_data)
-        journeys.append(journey)
-        session.add(journey)
-    session.commit()
-    return journeys
+    journeys = session.query(models.Journey).all()
+    return stations, journeys
