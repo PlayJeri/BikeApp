@@ -21,25 +21,25 @@ const AddStationForm: React.FC<AddStationFormProps> = ({ onSubmit }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const formData = {
-            station_id: stationId,
-            station_name_finnish: stationNameFinnish,
-            station_name_swedish: stationNameSwedish,
-            station_name_english: stationNameEnglish,
-            address_finnish: addressFinnish,
-            address_swedish: addressSwedish,
-            city_finnish: cityFinnish,
-            city_swedish: citySwedish,
-            operator: operator,
-            capacity: capacity,
-            x_coordinate: xCoordinate,
-            y_coordinate: yCoordinate                 
-        }
-
+        const formData = new FormData()
+        formData.append('station_id', stationId.toString())
+        formData.append('station_name_finnish', stationNameFinnish)
+        formData.append('station_name_swedish', stationNameSwedish)
+        formData.append('station_name_english', stationNameEnglish)
+        formData.append('address_finnish', addressFinnish)
+        formData.append('address_swedish', addressSwedish)
+        formData.append('city_finnish', cityFinnish)
+        formData.append('city_swedish', citySwedish)
+        formData.append('operator', operator)
+        formData.append('capacity', capacity.toString())
+        formData.append('x_coordinate', xCoordinate)
+        formData.append('y_coordinate', yCoordinate)
+      
         onSubmit(formData)
+      
     }
   return (
-    <form className="p-4 bg-white shadow-md rounded-lg" onSubmit={handleSubmit}>
+    <form className="p-4 bg-white shadow-md rounded-lg w-11/12 md:w-9/12 lg:w-7/12 xl:w-5/12 mx-auto" onSubmit={handleSubmit}>
         <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="station_id">
                 Station ID
@@ -198,7 +198,7 @@ const AddStationForm: React.FC<AddStationFormProps> = ({ onSubmit }) => {
         </div>
         <div className="flex items_center justify-between">
             <button
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-auto'
                 type="submit"
             >
                 Add Station

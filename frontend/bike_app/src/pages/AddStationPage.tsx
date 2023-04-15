@@ -4,11 +4,7 @@ import AddStationForm from '../components/AddStationForm'
 import Cookies from 'js-cookie'
 
 
-interface AddStationPageProps {
-    token: string
-}
-
-const AddStationPage:React.FC<AddStationPageProps> = ({ token }) => {
+const AddStationPage:React.FC = () => {
     const handleAddStation = async (stationData: any) => {
         const token = Cookies.get('jwt_token')
         try {
@@ -29,7 +25,7 @@ const AddStationPage:React.FC<AddStationPageProps> = ({ token }) => {
   return (
     <div className="bg-gray-900 min-h-screen text-white">
         <Navbar />
-        <h1 className='text-2xl font-bold mb-4'>Add a New Station</h1>
+        <h1 className='text-4xl uppercase text-center font-bold mb-4 py-4'>Add a New Station</h1>
         <AddStationForm onSubmit={handleAddStation} />
     </div>
   )
