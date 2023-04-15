@@ -18,6 +18,9 @@ const LoginPage: React.FC = () => {
             const data = await response.json()
             console.log(data)
             Cookies.set('jwt_token', data.access_token, { expires: data.expires_in / 86400})
+            if (response.status === 200) {
+                window.location.href = '/add/station'
+            }
         } catch (error) {
             console.log(error)
         }
