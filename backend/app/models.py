@@ -35,3 +35,10 @@ class Journey(Base):
     __table_args__ = (
         UniqueConstraint('departure_time', 'departure_station_id', 'return_time', 'return_station_id'),
     )
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String, nullable=False, unique=True)
+    password = Column(String, nullable=False)
