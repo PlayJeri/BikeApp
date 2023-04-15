@@ -35,7 +35,6 @@ def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session =
 
 @router.post('/station')
 def add_station(station_schema: schemas.Station ,db: Session = Depends(get_db), current_user = Depends(get_current_user)):
-    print(current_user.username)
 
     new_station = models.Station(**station_schema.dict())
 
