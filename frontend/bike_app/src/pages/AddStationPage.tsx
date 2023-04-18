@@ -16,8 +16,9 @@ const AddStationPage:React.FC = () => {
                 },
                 body: JSON.stringify(stationData),
             })
-            const data = await response.json()
-            console.log(data)
+            if (response.status === 201) {
+                window.alert('Station created successfully')
+            }
         } catch (error) {
             console.log(error)
         }
