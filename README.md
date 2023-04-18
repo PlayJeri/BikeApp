@@ -32,8 +32,9 @@ If you don't want to use docker, follow the steps below.
 5. Install dependencies with following command
 * pip install -r requirements.txt
 6. Run 'csv_parser.py' to create admin account and to create and populate the database.
-7. Run the backend with the following command:
+7. Run the backend with the following command
 * uvicorn app.main:app
+* if there is an error try reactivating your virtual environment
 
 
 ### Frontend
