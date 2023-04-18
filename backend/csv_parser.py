@@ -8,7 +8,7 @@ import csv
 
 
 journeys_csv_filenames = ['2021-05.csv', '2021-06.csv', '2021-07.csv']
-stations_csv_filename = 'stations.csv'
+stations_csv_filename = 'Helsingin_ja_Espoon_kaupunkipy%C3%B6r%C3%A4asemat_avoin.csv'
 csv_folder_path = 'csv_files'
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
