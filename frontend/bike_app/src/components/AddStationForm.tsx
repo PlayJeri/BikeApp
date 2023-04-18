@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 interface AddStationFormData {
-    station_id: number;
+    station_id: string;
     station_name_finnish: string;
     station_name_swedish: string;
     station_name_english: string;
@@ -10,7 +10,7 @@ interface AddStationFormData {
     city_finnish: string;
     city_swedish: string;
     operator: string;
-    capacity: number;
+    capacity: string;
     x_coordinate: string;
     y_coordinate: string;
   }
@@ -20,7 +20,7 @@ interface AddStationFormData {
   }
 
 const AddStationForm: React.FC<AddStationFormProps> = ({ onSubmit }) => {
-    const [stationId, setStationId] = useState<number>(0);
+    const [stationId, setStationId] = useState<string>("");
     const [stationNameFinnish, setStationNameFinnish] = useState<string>("");
     const [stationNameSwedish, setStationNameSwedish] = useState<string>("");
     const [stationNameEnglish, setStationNameEnglish] = useState<string>("");
@@ -29,7 +29,7 @@ const AddStationForm: React.FC<AddStationFormProps> = ({ onSubmit }) => {
     const [cityFinnish, setCityFinnish] = useState<string>("");
     const [citySwedish, setCitySwedish] = useState<string>("");
     const [operator, setOperator] = useState<string>("");
-    const [capacity, setCapacity] = useState<number>(0);
+    const [capacity, setCapacity] = useState<string>("");
     const [xCoordinate, setXCoordinate] = useState<string>("");
     const [yCoordinate, setYCoordinate] = useState<string>("");
 
@@ -55,7 +55,7 @@ const AddStationForm: React.FC<AddStationFormProps> = ({ onSubmit }) => {
         onSubmit(formData)
     }
   return (
-    <form className="p-4 bg-white shadow-md rounded-lg" onSubmit={handleSubmit}>
+    <form className="p-4 bg-white shadow-md rounded-lg w-11/12 md:w-9/12 lg:w-7/12 xl:w-5/12 mx-auto" onSubmit={handleSubmit}>
         <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="station_id">
                 Station ID
@@ -66,7 +66,7 @@ const AddStationForm: React.FC<AddStationFormProps> = ({ onSubmit }) => {
                 type="text"
                 placeholder="Station ID"
                 value={stationId}
-                onChange={(e) => setStationId(parseInt(e.target.value))}
+                onChange={(e) => setStationId(e.target.value)}
                 />
             </div>
         <div className="mb-6">
@@ -183,7 +183,7 @@ const AddStationForm: React.FC<AddStationFormProps> = ({ onSubmit }) => {
                 type="text"
                 placeholder="Capacity"
                 value={capacity}
-                onChange={(e) => setCapacity(parseInt(e.target.value))}
+                onChange={(e) => setCapacity(e.target.value)}
                 />
         </div>
         <div className="mb-6">
