@@ -5,7 +5,7 @@ This project is part of the Solita Dev Academy program. It consists of a web app
 ## Getting Started
 
 To get started with testing the project, clone this repository by running the following command in your terminal:
-git clone https://github.com/PlayJeri/solita-dev-academy.git
+* git clone https://github.com/PlayJeri/solita-dev-academy.git
 
 
 ### Prerequisites
