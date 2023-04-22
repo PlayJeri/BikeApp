@@ -6,7 +6,7 @@ from .routers import journeys, stations, admin
 app = FastAPI()
 
 origins = [
-    "http://localhost:5173"
+    "*"
 ]
 
 app.add_middleware(
