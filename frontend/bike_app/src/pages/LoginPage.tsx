@@ -2,12 +2,16 @@ import Cookies from 'js-cookie'
 import React from 'react'
 import Navbar from '../components/Navbar'
 import LoginForm from '../components/LoginForm'
+import dotenv from 'dotenv'
+dotenv.config()
+
+const baseURL = process.env.BASE_URL
 
 const LoginPage: React.FC = () => {
 
     const handleLogin = async (username: string, password: string) => {
         try {
-            const response = await fetch("http://localhost:8000/login", {
+            const response = await fetch(`${baseURL}/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",

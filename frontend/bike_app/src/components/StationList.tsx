@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import dotenv from 'dotenv'
+dotenv.config()
+
+const baseURL = process.env.BASE_URL
 
 type Station = {
     station_id: number
@@ -25,7 +29,7 @@ const StationList: React.FC = () => {
         const fetchStations = async () => {
             setIsLoading(true)
             try {
-                const response = await fetch(`http://127.0.0.1:8000/stations?page=${page}&size=30`)
+                const response = await fetch(`${baseURL}/stations?page=${page}&size=30`)
                 const data: StationsResponse = await response.json()
                 setStations(data.items)
                 setTotalPages(data.pages)

@@ -2,13 +2,17 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import AddStationForm from '../components/AddStationForm'
 import Cookies from 'js-cookie'
+import dotenv from 'dotenv'
+dotenv.config()
+
+const baseURL = process.env.BASE_URL
 
 
 const AddStationPage:React.FC = () => {
     const handleAddStation = async (stationData: any) => {
         const token = Cookies.get('jwt_token')
         try {
-            const response = await fetch('http://localhost:8000/station', {
+            const response = await fetch(`${baseURL}/station`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
