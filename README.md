@@ -24,6 +24,8 @@ Before running the application, you need to have Python and Node.js installed on
 3. Make sure that your CSV filenames match the names of the variables in `csv_parser.py`.
 4. If you want to run the backend in Docker, run the following command in your terminal:
 * docker-compose up --build -d
+* docker ps
+* docker exec -it <image_name> bash
 * csv_parser.py
 
 If you don't want to use docker, follow the steps below.

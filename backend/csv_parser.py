@@ -25,7 +25,6 @@ def create_admin_user():
     else:
         print("Make sure passwords match.")
         create_admin_user()
-
     new_user = User(
         username = username,
         password = hashed_password

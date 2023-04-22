@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import L from 'leaflet'
 
 interface MapProps {
     x: number
