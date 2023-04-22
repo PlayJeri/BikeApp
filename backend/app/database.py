@@ -6,9 +6,9 @@ import os
 
 load_dotenv()
 
-DATABASE_URI = "sqlite:///./bike_app.db"
+DATABASE_URI = os.getenv('DATABASE_URL')
 
-engine = create_engine(DATABASE_URI, connect_args={"check_same_thread": False})
+engine = create_engine(DATABASE_URI)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
