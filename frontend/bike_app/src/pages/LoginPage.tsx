@@ -2,10 +2,8 @@ import Cookies from 'js-cookie'
 import React from 'react'
 import Navbar from '../components/Navbar'
 import LoginForm from '../components/LoginForm'
-import dotenv from 'dotenv'
-dotenv.config()
 
-const baseURL = process.env.BASE_URL
+const baseURL = import.meta.env.VITE_BASE_URL
 
 const LoginPage: React.FC = () => {
 

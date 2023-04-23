@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+const baseURL = import.meta.env.VITE_BASE_URL
+
 interface Station {
   station_id: number;
   station_name_finnish: string;
@@ -13,7 +15,7 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const fetchSearchStations = async () => {
-      const response = await fetch(`http://127.0.0.1:8000/stations/search?station_name=${searchValue}`);
+      const response = await fetch(`${baseURL}/stations/search?station_name=${searchValue}`);
       const data = await response.json();
       setSearchResults(data);
     };

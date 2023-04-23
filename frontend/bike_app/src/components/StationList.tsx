@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import dotenv from 'dotenv'
-dotenv.config()
 
-const baseURL = process.env.BASE_URL
+const baseURL = import.meta.env.VITE_BASE_URL
 
 type Station = {
     station_id: number

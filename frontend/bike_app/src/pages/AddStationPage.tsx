@@ -2,11 +2,8 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import AddStationForm from '../components/AddStationForm'
 import Cookies from 'js-cookie'
-import dotenv from 'dotenv'
-dotenv.config()
 
-const baseURL = process.env.BASE_URL
-
+const baseURL = import.meta.env.VITE_BASE_URL
 
 const AddStationPage:React.FC = () => {
     const handleAddStation = async (stationData: any) => {

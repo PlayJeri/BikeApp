@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import StationData from '../pages/StationListPage'
 import Map from './Map';
-import dotenv from 'dotenv'
-dotenv.config()
 
-const baseURL = process.env.BASE_URL
+const baseURL = import.meta.env.VITE_BASE_URL
+
 
 interface StationProps {
     stationID: string | undefined
@@ -49,7 +48,7 @@ export default function Station({ stationID }: StationProps) {
 
     useEffect(() => {
         const fetchStationData = async () => {
-            const response = await fetch(`${baseURL}/${stationID}`)
+            const response = await fetch(`${baseURL}/station/${stationID}`)
             const data = await response.json()
             setStationData(data)
         }

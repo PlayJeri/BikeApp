@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+const baseURL = import.meta.env.VITE_BASE_URL
+
 type Journey = {
     id: number
     departure_station_name: string
@@ -35,7 +37,7 @@ const JourneyList: React.FC = () => {
         const fetchJourneyList = async () => {
             setIsLoading(true)
                 try {
-                    const response = await fetch(`http://127.0.0.1:8000/journeys?&sort_by=${sortBy.column}&order=${sortBy.order}&page=${page}`)
+                    const response = await fetch(`${baseURL}/journeys?&sort_by=${sortBy.column}&order=${sortBy.order}&page=${page}`)
                     const data: JourneysResponse = await response.json()
                     setJourneys(data.items)
                     setTotal(data.total)
