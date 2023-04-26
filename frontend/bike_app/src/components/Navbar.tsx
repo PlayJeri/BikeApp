@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
               </Link>
             </div>
           </div>
-          <div className="relative flex items-center">
+          <div className="relative items-center hidden md:block">
             <input
               id="search-field"
               type="text"
@@ -91,6 +91,34 @@ const Navbar: React.FC = () => {
             )}
           </div>
         </div>
+        <div className="relative items-center block md:hidden">
+            <input
+              id="search-field"
+              type="text"
+              className="mx-auto w-full md:w-64 text-center py-2 px-3 rounded-md bg-gray-700 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              placeholder="Search stations..."
+              onChange={handleSearchInputChange}
+              value={searchValue}
+              onBlur={handleSetIsDropdownOpen}
+              onFocus={() => setIsDropdownOpen(true)}
+            />
+            {isDropdownOpen && (
+              <div className="absolute bg-white w-full mt-1 rounded-md shadow-lg" style={{top: '100%'}}>
+              <ul className="py-1">
+                {searchResults.map((station) => (
+                  <li key={station.station_id} className="px-3 py-2 hover:bg-gray-100">
+                    <Link
+                      to={`/station/${station.station_id}`}
+                      className="block text-gray-900 hover:text-white"
+                    >
+                      {station.station_name_finnish}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            )}
+          </div>
       </nav>
     </header>
   );
