@@ -1,8 +1,36 @@
 # Helsinki city bike app (Dev Academy pre-assignment)
 
-This project is part of the Solita Dev Academy program. It consists of a web application that visualizes bike journey data.
+This project consists of a fastAPI backend, React frontend and a database.
 
-## Getting Started
+Journeys page displays starting and ending stations and covered distance and duration of completed journeys.
+The page uses pagination and has option for limiting the number of journeys and sorting the data by clicking station name, duration, or distance.
+
+Stations page displays name and address of all the stations from the database and uses pagination.
+
+Station page displays more information about a specific station including stations location using OpenStreetMap API
+
+Search bar can be used to find a specific station by stations name.
+
+The app also has admin functionality to add new stations to the database.
+For authentication the app uses OAuth2 and JSON web tokens at /login endpoint.
+
+
+## This application is deployed on render.com
+
+App can be used here:
+* https://bikeapp-8fs7.onrender.com
+Api swagger documentation can be viewed here:
+* https://dikeapp-docker.onrender.com/docs
+
+Due to limitations of renders free tier hosting optinos the backend takes about 30 seconds to boot when you first visit the site.
+Fetching station data and sorting the journey data also takes quite long because of these limitations.
+
+To add new stations you need to login by going to 
+* https://bikeapp-8fs7.onrender.com/login
+username and password are both "admin"
+
+
+## Getting Started locally
 
 To get started with testing the project, clone this repository by running the following command in your terminal:
 * git clone https://github.com/PlayJeri/solita-dev-academy.git
