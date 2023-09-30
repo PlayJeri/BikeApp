@@ -15,7 +15,7 @@ The app also has admin functionality to add new stations to the database.
 For authentication the app uses OAuth2 and JSON web tokens at /login endpoint.
 
 
-## This application is deployed on render.com
+## This application is deployed on render.com "Free tier database has expired so the app no longer works"
 
 App can be used here:
 * https://bikeapp-8fs7.onrender.com
