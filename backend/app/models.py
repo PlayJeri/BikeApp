@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Float, Integer, TIMESTAMP, UniqueConstraint
+from sqlalchemy import Column, String, Float, Integer, TIMESTAMP, UniqueConstraint, ForeignKey
 
 from .database import Base
 
@@ -25,9 +25,9 @@ class Journey(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     departure_time = Column(TIMESTAMP)
     return_time = Column(TIMESTAMP)
-    departure_station_id = Column(Integer)
+    departure_station_id = Column(Integer, ForeignKey('stations.id'))
     departure_station_name = Column(String)
-    return_station_id = Column(Integer)
+    return_station_id = Column(Integer, ForeignKey('stations.id'))
     return_station_name = Column(String)
     covered_distance = Column(Integer)
     duration = Column(Integer)
